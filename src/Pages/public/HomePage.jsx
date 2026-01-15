@@ -1,12 +1,12 @@
 import React from 'react'
 import Hero from '../../components/Hero'
-import WhyChose from '../../components/WhyChose'
+import WhyChoose from '../../components/WhyChoose'
 
 function HomePage() {
   return (
     <>
         <Hero/>
-        <WhyChose/>
+        <WhyChoose/>
     </>
   )
 }
