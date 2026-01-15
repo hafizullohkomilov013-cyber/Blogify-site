@@ -26,7 +26,7 @@ function Hero() {
             <Button variant={"secendary"}>Get Started</Button>
           </div>
         </div>
-        <div className="hidden lg:block">
+        <div className="hidden lg:block   ">
           <img className="w-full max-w-146 h-82" src={HeroImg} alt="" />
         </div>
       </div>

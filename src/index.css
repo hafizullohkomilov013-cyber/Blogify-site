@@ -5,6 +5,12 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+.link-cursor:hover{
+  color: blue;
+  transition: all 1.1;
+  transform: rotate(0.5s);
+}
+
 .container{
     width: 100%;
     max-width: 1256px;

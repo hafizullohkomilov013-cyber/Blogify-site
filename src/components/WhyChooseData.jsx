@@ -4,7 +4,7 @@ function WhyChooseCard({ item }) {
   let { text, title, icon } = item;
 
   return (
-    <div className="w-full max-w-[384px] h-60 items-center justify-center rounded-2xl border border-gray-600 p-8">
+    <div className="w-full duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl max-w-[384px] h-60 items-center justify-center rounded-2xl border-2 border-gray-400 p-8">
       <img src={icon} alt="icon" />
       <h2 className="mt-4 mb-2 text-[20px] font-bold text-[#0F1729]">
         {title}
