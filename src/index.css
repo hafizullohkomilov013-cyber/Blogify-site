@@ -1,9 +1,10 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inder&display=swap");
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inder', sans-serif;
 }
+
 
 .link-cursor:hover{
   color: blue;

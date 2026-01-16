@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Footer() {
   return (
     <footer className="border-t-2 border-gray-300">
-      <section className="container gap-8 pt-12 pb-8 border-b-2 mb-10 border-gray-200 flex justify-between">
+      <section className="container gap-8 pt-12 pb-8 border-b-2 mb-10 flex flex-col border-gray-200 md:flex-row justify-between">
         <div className="flex flex-col h-full min-h-34  gap-4 w-full max-w-148 items-start">
           <img src={NavLogo} alt="Footer-Logo" />
           <p className="text-[#6B7280] w-full max-w-[384px] text-[16px]">
