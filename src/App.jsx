@@ -2,8 +2,8 @@ import React from 'react'
 import Puplic from './Layouts/Public'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './Pages/public/HomePage'
-import PostPages from './Pages/public/PostPages'
 import PostDetailsPage from './Pages/public/PostDetailsPage'
+import PostPages from './Pages/public/PostPages'
 
 function App() {
   let routes = createBrowserRouter([
@@ -17,7 +17,7 @@ function App() {
         },
         {
           path:"/PostPages", 
-          element:<PostPages/>,
+          element:<PostPages/>
         },
         {
           path:"/PostDetailsPages", 

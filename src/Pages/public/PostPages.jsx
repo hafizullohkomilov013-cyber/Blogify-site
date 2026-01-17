@@ -1,10 +1,11 @@
 import React from 'react'
+import PostHero from '../../components/PostHero'
 
 function PostPages() {
   return (
-    <div className='container'>
-        <h2>PostPages</h2>
-    </div>
+    <>
+        <PostHero/>
+    </>
   )
 }
 

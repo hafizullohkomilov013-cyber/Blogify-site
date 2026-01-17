@@ -5,13 +5,15 @@ import Button from './Button'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 
+let Base = import.meta.env.VITE_BASE_URL
+
 function LatestPosts() {
     let [post, setPost] = useState([])
 
     useEffect(() => {
         async function GetPost() {
             try {
-                let res = await fetch('https://alijonov0901.pythonanywhere.com/api/v1/articles/')
+                let res = await fetch(`${Base}api/v1/articles/`)
 
                 if(!res.ok){
                     throw new Error('Apida muammo')
@@ -39,7 +41,9 @@ console.log(post);
           </p>
         </div>
         <Button variant={"secendary"}>
-          View all <i className="fa-solid fa-arrow-right"></i>
+          <Link to={"/PostPages"}>
+            View all <i className="fa-solid fa-arrow-right"></i>
+          </Link>
         </Button>
       </div>
       <div className="grid  grid-cols-[repeat(auto-fit,minmax(293px,1fr))]  gap-8">
@@ -53,9 +57,13 @@ console.log(post);
                 <h2 className="bg-[#4346EF] z-2 py-0.5 px-2.5 rounded-2xl text-white absolute top-5 left-4">
                   {post.category.name}
                 </h2>
-                <img className="rounded-t-2xl z-1 w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110 " src={post.image} alt="" />
+                <img
+                  className="rounded-t-2xl z-1 w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110 "
+                  src={post.image}
+                  alt=""
+                />
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col justify-between ">
                 <div className="text-[#6B7280] mb-12px flex gap-2 items-center">
                   <i className="fa-regular fa-calendar"></i>
                   <p>{post.updated_at.slice(0, 10)}</p>
@@ -64,8 +72,11 @@ console.log(post);
                   {post.title}
                 </h2>
                 <p className="text-[#6B7280] mb-4">{post.content}</p>
-                <div className="text-[#4346EF] ">
-                  <Link className='flex justify-start items-center gap-1 group-hover:gap-2.5' to={"/"}>
+                <div className="text-[#4346EF]">
+                  <Link
+                    className="flex justify-start items-center gap-1 group-hover:gap-2.5"
+                    to={"/PostPages"}
+                  >
                     Read more{" "}
                     <i className="text-[16px] fa-solid fa-arrow-right"></i>
                   </Link>
