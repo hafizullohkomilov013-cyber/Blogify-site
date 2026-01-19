@@ -9,7 +9,7 @@ function Navbar() {
     const [open, setOpen] = useState(false) 
 
     return (
-    <nav className='pt-4 pb-4 fixed right-0 left-0 top-0 backdrop-blur-md bg-white/70'>
+    <nav className='pt-4 z-30 pb-4 fixed right-0 left-0 top-0 backdrop-blur-md bg-white/70'>
         <div className='container   flex justify-between items-center'>
             <img src={NavLogo} alt="Bilogyfay-logo" />
             <div className='hidden md:flex gap-8 justify-center items-center'>
