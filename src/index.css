@@ -3,6 +3,7 @@
 
 body {
   font-family: 'Inder', sans-serif;
+  overflow-x: hidden;
 }
 
 
