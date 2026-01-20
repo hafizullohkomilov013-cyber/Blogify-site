@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
+import RelatedPosts from './RelatedPosts';
 
 let Base = import.meta.env.VITE_BASE_URL;
 
@@ -25,7 +26,7 @@ function PostDetailsPages() {
       }
     }
     getPost();
-  }, []);
+  }, [hi]);
 
   if (!post) {
     return <h2>Loading...</h2>;
@@ -55,6 +56,7 @@ function PostDetailsPages() {
             </p>
         </div>
       </div>
+      <RelatedPosts post={post} id={id} />
     </section>
   );
 }
