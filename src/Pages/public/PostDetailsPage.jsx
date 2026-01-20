@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-function PostDetailsPage() {
+function PostDetailsPages() {
   let param = useParams([])
 
   console.log(param);
@@ -13,4 +13,4 @@ function PostDetailsPage() {
   )
 }
 
-export default PostDetailsPage
+export default PostDetailsPages;

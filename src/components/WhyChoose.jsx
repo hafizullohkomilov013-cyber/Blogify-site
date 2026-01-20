@@ -15,7 +15,7 @@ function WhyChoose() {
           blogging experience.
         </p>
       </div>
-      <div className="flex flex-col mt-16 mb-32 flex-wrap items-center     justify-center gap-8 md:flex-row">
+      <div className=" mt-16 mb-32  grid-cols-[repeat(auto-fit,minmax(293px,1fr))]  gap-8">
         {whyChooseData.map((item) => {
           return <WhyChooseData key={item.id} item={item} />;
         })}
