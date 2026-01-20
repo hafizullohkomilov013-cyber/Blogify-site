@@ -52,7 +52,7 @@ function PostPages() {
                     alt=""
                   />
                 </div>
-                <div className="p-6 flex flex-col justify-between ">
+                <div className="p-6">
                   <div className="text-[#6B7280] mb-12px flex gap-2 items-center">
                     <i className="fa-regular fa-calendar"></i>
                     <p>{post.updated_at.slice(0, 10)}</p>
@@ -64,7 +64,7 @@ function PostPages() {
                   <div className="text-[#4346EF]">
                     <Link
                       className="flex justify-start items-center gap-1 group-hover:gap-2.5"
-                      to={"/PostPages"}
+                      to={`/PostDetailsPages/${post.id}`}
                     >
                       Read more{" "}
                       <i className="text-[16px] fa-solid fa-arrow-right"></i>

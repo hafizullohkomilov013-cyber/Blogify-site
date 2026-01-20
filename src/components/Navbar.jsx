@@ -11,7 +11,7 @@ function Navbar() {
     return (
     <nav className='pt-4 z-30 pb-4 fixed right-0 left-0 top-0 backdrop-blur-md bg-white/70'>
         <div className='container   flex justify-between items-center'>
-            <img src={NavLogo} alt="Bilogyfay-logo" />
+            <Link to={"/"}><img src={NavLogo} alt="Bilogyfay-logo" /></Link>
             <div className='hidden md:flex gap-8 justify-center items-center'>
                 <Link className='font-medium link-cursor text-[16px] text-[#0F1729] ' to="/">Home</Link>
                 <Link className='font-medium link-cursor text-[16px] text-[#0F1729] ' to="/PostPages">Posts</Link>

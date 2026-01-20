@@ -13,14 +13,14 @@ function App() {
       children:[
         {
           index: true, 
-          element: <HomePage/>
+          element: <HomePage/>  
         },
         {
           path:"/PostPages", 
           element:<PostPages/>
         },
         {
-          path:"/PostDetailsPages", 
+          path:"/PostDetailsPages/:hi", 
           element:<PostDetailsPage/>
         }
       ]

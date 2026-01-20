@@ -5,7 +5,7 @@ import { whyChooseData } from '../data/WhyChooseData';
 
 function WhyChoose() {
   return (
-    <section className="my-32">
+    <section className="container pt-32">
       <div className="text-center">
         <h2 className="text-[#0F1729] text-[36px] mb-3 font-bold tracking-tight">
           Why Choose Blogify?
@@ -15,7 +15,7 @@ function WhyChoose() {
           blogging experience.
         </p>
       </div>
-      <div className=" mt-16 mb-32  grid-cols-[repeat(auto-fit,minmax(293px,1fr))]  gap-8">
+      <div className=" mt-16 mb-32 grid  grid-cols-[repeat(auto-fit,minmax(293px,1fr))]  gap-8">
         {whyChooseData.map((item) => {
           return <WhyChooseData key={item.id} item={item} />;
         })}
