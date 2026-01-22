@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 function PostCard({post}) {
     console.log(post);
-    <h2>salom</h2>
     
   return (
     <div className="container py-16">

@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './Pages/public/HomePage'
 import PostDetailsPage from './Pages/public/PostDetailsPage'
 import PostPages from './Pages/public/PostPages'
+import AuthLayouts from './Layouts/AuthLayouts'
+import LoginPage from './Pages/auth/LoginPage'
 
 function App() {
   let routes = createBrowserRouter([
@@ -22,6 +24,16 @@ function App() {
         {
           path:"/PostDetailsPages/:hi", 
           element:<PostDetailsPage/>
+        }
+      ]
+    },
+    {
+      path:'/Login',
+      element:<AuthLayouts/>,
+      children:[
+        {
+          index: true,
+          element:<LoginPage/>
         }
       ]
     }

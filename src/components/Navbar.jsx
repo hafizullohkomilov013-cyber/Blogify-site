@@ -15,7 +15,7 @@ function Navbar() {
             <div className='hidden md:flex gap-8 justify-center items-center'>
                 <Link className='font-medium link-cursor text-[16px] text-[#0F1729] ' to="/">Home</Link>
                 <Link className='font-medium link-cursor text-[16px] text-[#0F1729] ' to="/PostPages">Posts</Link>
-                <Link className='font-medium text-4 text-white rounded-xl w-16 h-9 rounded-1xl bg-[#4346EF] flex justify-center items-center' to="/">Login</Link>
+                <Link className='font-medium text-4 text-white rounded-xl w-16 h-9 rounded-1xl bg-[#4346EF] flex justify-center items-center' to="/login">Login</Link>
             </div>
             <div onClick={() => {setOpen(!open)}} className='md:hidden'>
                 {open ? (<i className="text-2xl cursor-pointer fa-solid fa-x"></i>) : (<i className="text-2xl cursor-pointer fa-solid fa-bars"></i>)}
