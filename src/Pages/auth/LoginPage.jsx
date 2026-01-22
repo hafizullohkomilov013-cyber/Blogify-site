@@ -81,7 +81,7 @@ function LoginPage() {
                 />
               </label>
               <button
-                className="text-white rounded-2xl w-full py-3 bg-[#4346EF]"
+                className="text-white cursor-pointer rounded-2xl w-full py-3 bg-[#4346EF]"
                 type="submit"
               >
                 Login
