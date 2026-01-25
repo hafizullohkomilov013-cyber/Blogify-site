@@ -5,7 +5,7 @@ import HeroImg from "../../src/assets/img/HeroImg.png"
 function Hero() {
   return (
     <section className="bg-[#F7F1FD]">
-      <div className="container py-32 flex justify-between">
+      <div className="container py-20 md:py-32 flex justify-between">
         <div className=" max-w-146px ">
           <div className="text-3xl leading-none ...">
             <h1 className="text-[#0F1729] text-[36px] md:text-[60px]  font-bold">

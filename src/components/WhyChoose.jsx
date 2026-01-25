@@ -1,5 +1,4 @@
 import React from 'react'
-import { v4 as uuidv4 } from "uuid";
 import WhyChooseData from './WhyChooseData';
 import { whyChooseData } from '../data/WhyChooseData';
 
@@ -15,7 +14,7 @@ function WhyChoose() {
           blogging experience.
         </p>
       </div>
-      <div className=" mt-16 mb-32 grid  grid-cols-[repeat(auto-fit,minmax(293px,1fr))]  gap-8">
+      <div className="  grid  grid-cols-[repeat(auto-fit,minmax(293px,1fr))]  gap-8">
         {whyChooseData.map((item) => {
           return <WhyChooseData key={item.id} item={item} />;
         })}
