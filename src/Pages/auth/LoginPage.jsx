@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import LoginImg from "../../assets/img/LoginImg.png"
 import LoginLogo from '../../assets/img/NavLogo.svg'
 import { Link } from 'react-router-dom';
@@ -10,11 +11,12 @@ let Base = import.meta.env.VITE_BASE_URL;
 function LoginPage() {
   let emailRef = useRef('')
   let paswordRef = useRef('')
+  let navigate = useNavigate()
+  console.log(navigate);
+  
   
   async function hendleSubmit (e) {
     e.preventDefault()
-    console.log("forma submit boldi");
-    console.log({email : emailRef.current.value, pasword : paswordRef.current.value} );
     try {
       let res = await fetch(`${Base}/auth/login/`, {
         method: "POST",
@@ -26,8 +28,11 @@ function LoginPage() {
             password: paswordRef.current.value,
         }),
       }); 
-
-      if(!res.ok){
+      
+      if(res.ok){
+        navigate("/admin")
+        
+      }else{
         throw new Error('Xatolik')
       }
       let data = await res.json()
@@ -42,7 +47,7 @@ function LoginPage() {
 
   return (
     <div className="flex h-screen">
-      <div className="flex-1 w-fit flex justify-center  h-full">
+      <div className="flex-1 w-fit px-5 flex justify-center  h-full">
         <div className="flex  w-full max-w-md flex-col   h-full justify-center">
           <img className="h-7 mb-8 w-fit" src={LoginLogo} alt="login-icon" />
           <Link

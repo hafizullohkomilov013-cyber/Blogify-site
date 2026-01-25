@@ -4,9 +4,10 @@ import { Outlet } from 'react-router-dom'
 function AuthLayouts() {
   return (
     <>
-      <Outlet/>
+      <Outlet/> 
     </>
   )
 }
 
 export default AuthLayouts
+  

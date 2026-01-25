@@ -6,6 +6,9 @@ import PostDetailsPage from './Pages/public/PostDetailsPage'
 import PostPages from './Pages/public/PostPages'
 import AuthLayouts from './Layouts/AuthLayouts'
 import LoginPage from './Pages/auth/LoginPage'
+import AdminLayout from './Layouts/AdminLayout'
+import DashBoardPage from './Pages/admin/DashBoardPage'
+import CreatePosts from './Pages/admin/CreatePosts'
 
 function App() {
   let routes = createBrowserRouter([
@@ -35,6 +38,20 @@ function App() {
           index: true,
           element:<LoginPage/>
         }
+      ]
+    },
+    {
+      path:'/admin',
+      element:<AdminLayout/>,
+      children:[
+        {
+          path:"dashboard",
+          element:<DashBoardPage/>
+        },
+        {
+          path:"createPosts",
+          element:<CreatePosts/>
+        },
       ]
     }
   ])
