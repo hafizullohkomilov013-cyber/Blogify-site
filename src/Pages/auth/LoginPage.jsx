@@ -30,7 +30,7 @@ function LoginPage() {
       }); 
       
       if(res.ok){
-        navigate("/admin")
+        navigate("/admin/dashboard")
         
       }else{
         throw new Error('Xatolik')
@@ -72,7 +72,7 @@ function LoginPage() {
                   className="p-3.25 mb-4 mt-3 border-2 outline border-[#E5E7EB]  w-full rounded-2xl"
                   type="text"
                   placeholder="name@example.com"
-                  ref={emailRef}
+                  ref={emailRef}  
                 />
               </label>
               <label>

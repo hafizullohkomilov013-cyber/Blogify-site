@@ -37,7 +37,7 @@ function App() {
         {
           index: true,
           element:<LoginPage/>
-        }
+        },
       ]
     },
     {

@@ -31,7 +31,7 @@ function NavbarAdmin() {
               ${isActive ? "bg-[#4346EF1A] text-[#4346EF]" : "hover:bg-gray-100"}`
           }
         >
-          <i class="fa-solid fa-plus"></i>
+          <i className="fa-solid fa-plus"></i>
           Create Post
         </NavLink>
       </div>
