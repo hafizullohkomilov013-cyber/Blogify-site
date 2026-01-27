@@ -2,9 +2,13 @@ import React from 'react'
 import NavLogo from "../assets/img/NavLogo.svg"
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import Button from './Button';
-
+import { Navigate } from 'react-router-dom';
 function NavbarAdmin() {
+  
+  let logAOut =() => {
+    localStorage.removeItem("token")
+    return <Navigate to={"/login"}/>
+  }
   return (
     <div className="flex flex-col justify-between border-r-2 w-64 h-screen border-[#E5E7EB]">
       <div className="p-6 w- border-b-2 border-[#E5E7EB]">
@@ -35,11 +39,13 @@ function NavbarAdmin() {
           Create Post
         </NavLink>
       </div>
-      <div className="p-4  border-t-2 border-[#E5E7EB] ">
-          <Link to={"/"} className='flex items-center w-full py-3.5 px-6 rounded-2xl hover:bg-gray-100 gap-3'>
+      <div>
+          <button onClick={logAOut()}  className="p-4  border-t-2 border-[#E5E7EB] ">
+            <Link to={"/login"} className='flex items-center w-full py-3.5 px-6 rounded-2xl hover:bg-gray-100 gap-3'>
             <i className="fa-solid fa-arrow-right-from-bracket"></i>
             Logout
           </Link>
+          </button>
       </div>
     </div>
   );

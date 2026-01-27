@@ -30,13 +30,14 @@ function LoginPage() {
       }); 
       
       if(res.ok){
+        let data = await res.json()
+        localStorage.setItem("token", JSON.stringify(data))
         navigate("/admin/dashboard")
         
       }else{
         throw new Error('Xatolik')
       }
-      let data = await res.json()
-      console.log(data);
+      
       
 
     } catch (error) {

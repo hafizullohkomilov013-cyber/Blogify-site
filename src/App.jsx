@@ -1,63 +1,66 @@
-import React from 'react'
-import Puplic from './Layouts/Public'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import HomePage from './Pages/public/HomePage'
-import PostDetailsPage from './Pages/public/PostDetailsPage'
-import PostPages from './Pages/public/PostPages'
-import AuthLayouts from './Layouts/AuthLayouts'
-import LoginPage from './Pages/auth/LoginPage'
-import AdminLayout from './Layouts/AdminLayout'
-import DashBoardPage from './Pages/admin/DashBoardPage'
-import CreatePosts from './Pages/admin/CreatePosts'
+import React from "react";
+import Puplic from "./Layouts/Public";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./Pages/public/HomePage";
+import PostDetailsPage from "./Pages/public/PostDetailsPage";
+import PostPages from "./Pages/public/PostPages";
+import AuthLayouts from "./Layouts/AuthLayouts";
+import LoginPage from "./Pages/auth/LoginPage";
+import AdminLayout from "./Layouts/AdminLayout";
+import DashBoardPage from "./Pages/admin/DashBoardPage";
+import CreatePosts from "./Pages/admin/CreatePosts";
+import ProtectRouter from "./components/ProtectRouter";
 
 function App() {
   let routes = createBrowserRouter([
     {
-      path:"/",
-      element:<Puplic/>,
-      children:[
-        {
-          index: true, 
-          element: <HomePage/>  
-        },
-        {
-          path:"/PostPages", 
-          element:<PostPages/>
-        },
-        {
-          path:"/PostDetailsPages/:hi", 
-          element:<PostDetailsPage/>
-        }
-      ]
-    },
-    {
-      path:'/Login',
-      element:<AuthLayouts/>,
-      children:[
+      path: "/",
+      element: <Puplic />,
+      children: [
         {
           index: true,
-          element:<LoginPage/>
+          element: <HomePage />,
         },
-      ]
+        {
+          path: "/PostPages",
+          element: <PostPages />,
+        },
+        {
+          path: "/PostDetailsPages/:hi",
+          element: <PostDetailsPage />,
+        },
+      ],
     },
     {
-      path:'/admin',
-      element:<AdminLayout/>,
-      children:[
+      path: "/Login",
+      element: <AuthLayouts />,
+      children: [
         {
-          path:"dashboard",
-          element:<DashBoardPage/>
+          index: true,
+          element: <LoginPage />,
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      element: (
+        <ProtectRouter>
+          <AdminLayout />
+        </ProtectRouter>
+      ),
+      children: [
+        {
+          path: "dashboard",
+          element: <DashBoardPage />,
         },
         {
-          path:"createPosts",
-          element:<CreatePosts/>
+          path: "createPosts",
+          element: <CreatePosts />,
         },
-      ]
-    }
-  ])
-  return(
-    <RouterProvider router = {routes}/>
-  )
+      ],
+    },
+  ]);
+  return <RouterProvider router={routes} />;
 }
 
-export default App
+export default App;
