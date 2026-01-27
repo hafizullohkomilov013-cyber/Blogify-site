@@ -2,12 +2,13 @@ import React from 'react'
 import NavLogo from "../assets/img/NavLogo.svg"
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function NavbarAdmin() {
+  let navigate = useNavigate()
   
   let logAOut =() => {
     localStorage.removeItem("token")
-    return <Navigate to={"/login"}/>
+    navigate("/login")
   }
   return (
     <div className="flex flex-col justify-between border-r-2 w-64 h-screen border-[#E5E7EB]">
