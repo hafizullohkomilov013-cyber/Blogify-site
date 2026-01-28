@@ -30,15 +30,12 @@ console.log(posts);
 
   return (
     <div className="p-8 min-h-screen m-auto w-full max-w-7xl">
-      {/* Header */}
       <div className="mb-8">
         <h1 className="text-[#0F1729] text-[30px] font-bold mb-2">Dashboard</h1>
         <p className="text-[#6B7280] text-sm">
           Welcome back! Here's an overview of your blog.
         </p>
       </div>
-
-      {/* Stats */}
       <div className="flex gap-6 mb-3">
         {Stats.map((item) => (
           <div
@@ -58,8 +55,6 @@ console.log(posts);
           </div>
         ))}
       </div>
-
-      {/* Recent Posts */}
       <div className="w-full bg-white rounded-xl shadow-sm border-2 border-gray-200 p-6">
         <div className="mb-6">
           <h2 className="text-[20px] mb-1 font-semibold text-[#0F1724]">

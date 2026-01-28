@@ -53,7 +53,7 @@ function LoginPage() {
           <img className="h-7 mb-8 w-fit" src={LoginLogo} alt="login-icon" />
           <Link
             to={"/"}
-            className="flex w-fit font-medium mb-8 items-center gap-4 text-[#0F1729] text-[12px] py-2.5 px-4"
+            className="flex w-fit text-gray-700 font-medium mb-8 items-center gap-4 text-[12px] py-2.5 px-4"
           >
             <i className="fa-solid fa-arrow-left"></i>
             Back to Home
@@ -81,7 +81,7 @@ function LoginPage() {
                 <input
                   required
                   className="p-3.25 mt-3 mb-4 border-2 outline border-[#E5E7EB]  w-full rounded-2xl"
-                  type="pasword"
+                  type="password"
                   placeholder="******"
                   ref={paswordRef}
                 />
