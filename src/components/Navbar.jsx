@@ -1,7 +1,7 @@
 import React from 'react'
 import NavLogo from "../assets/img/NavLogo.svg"
 import { Link } from 'react-router-dom'
-import BarLinks from '../Pages/public/BarLinks'
+import BarLinks from '../components/BarLinks'
 import { useState } from 'react'
 
 

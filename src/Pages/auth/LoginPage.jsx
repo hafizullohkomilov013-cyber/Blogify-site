@@ -1,22 +1,21 @@
-import React from 'react'
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginImg from "../../assets/img/LoginImg.png"
-import LoginLogo from '../../assets/img/NavLogo.svg'
-import { Link } from 'react-router-dom';
-import { useRef } from 'react';
-import { toast } from 'react-toastify';
+import LoginImg from "../../assets/img/LoginImg.png";
+import LoginLogo from "../../assets/img/NavLogo.svg";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 let Base = import.meta.env.VITE_BASE_URL;
 
 function LoginPage() {
-  let emailRef = useRef('')
-  let paswordRef = useRef('')
-  let navigate = useNavigate()
-  console.log(navigate);
-  
-  
-  async function hendleSubmit (e) {
-    e.preventDefault()
+  let emailRef = useRef("");
+  let paswordRef = useRef("");
+  let navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // loading state
+
+  async function hendleSubmit(e) {
+    e.preventDefault();
+    setLoading(true); // spinnerni yoqish
     try {
       let res = await fetch(`${Base}/auth/login/`, {
         method: "POST",
@@ -24,32 +23,29 @@ function LoginPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-           email: emailRef.current.value,
-            password: paswordRef.current.value,
+          email: emailRef.current.value,
+          password: paswordRef.current.value,
         }),
-      }); 
-      
-      if(res.ok){
-        let data = await res.json()
-        localStorage.setItem("token", JSON.stringify(data))
-        navigate("/admin/dashboard")
-        
-      }else{
-        throw new Error('Xatolik')
-      }
-      
-      
+      });
 
+      if (res.ok) {
+        let data = await res.json();
+        localStorage.setItem("token", JSON.stringify(data));
+        navigate("/admin/dashboard");
+      } else {
+        throw new Error("Xatolik");
+      }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
+    } finally {
+      setLoading(false); // spinnerni o‘chirish
     }
   }
-  
 
   return (
     <div className="flex h-screen">
-      <div className="flex-1 w-fit px-5 flex justify-center  h-full">
-        <div className="flex  w-full max-w-md flex-col   h-full justify-center">
+      <div className="flex-1 w-fit px-5 flex justify-center h-full">
+        <div className="flex w-full max-w-md flex-col h-full justify-center">
           <img className="h-7 mb-8 w-fit" src={LoginLogo} alt="login-icon" />
           <Link
             to={"/"}
@@ -70,29 +66,39 @@ function LoginPage() {
                 <span className="text-[#0F1729]">Email</span> <br />
                 <input
                   required
-                  className="p-3.25 mb-4 mt-3 border-2 outline border-[#E5E7EB]  w-full rounded-2xl"
+                  className="p-3.25 mb-4 mt-3 border-2 outline border-[#E5E7EB] w-full rounded-2xl"
                   type="text"
                   placeholder="name@example.com"
-                  ref={emailRef}  
+                  ref={emailRef}
                 />
               </label>
               <label>
-                <span className="text-[#0F1729]">Pasword</span> <br />
+                <span className="text-[#0F1729]">Password</span> <br />
                 <input
                   required
-                  className="p-3.25 mt-3 mb-4 border-2 outline border-[#E5E7EB]  w-full rounded-2xl"
+                  className="p-3.25 mt-3 mb-4 border-2 outline border-[#E5E7EB] w-full rounded-2xl"
                   type="password"
                   placeholder="******"
                   ref={paswordRef}
                 />
               </label>
+
+              {/* LOGIN BUTTON */}
               <button
-                className="text-white cursor-pointer rounded-2xl w-full py-3 bg-[#4346EF]"
                 type="submit"
+                disabled={loading} // disabled qilamiz
+                className={`text-white cursor-pointer rounded-2xl w-full py-3 bg-[#4346EF] flex justify-center items-center ${
+                  loading ? "opacity-70" : ""
+                }`}
               >
-                Login
+                {loading ? (
+                  <i className="fa-solid fa-circle-notch fa-spin text-white"></i>
+                ) : (
+                  "Login"
+                )}
               </button>
             </form>
+
             <div className="flex text-center justify-center mt-6">
               <p className="text-[#6B7280]">Don't have an account? </p>
               <Link to={"#"} className="text-[#4346EF]">
@@ -102,6 +108,7 @@ function LoginPage() {
           </div>
         </div>
       </div>
+
       <div className="hidden flex-1 lg:flex bg-[#F2F1FD] h-full justify-center items-center">
         <div className="h-full text-center">
           <img
@@ -121,4 +128,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage
+export default LoginPage;

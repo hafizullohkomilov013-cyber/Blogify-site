@@ -7,8 +7,8 @@ export const PostContext = createContext()
 
 let Base = import.meta.env.VITE_BASE_URL;
 
-function PostProvider({ children, id }) {
-    let [posts, setPosts] = useState()
+function PostProvider({ children }) {
+    let [posts, setPosts] = useState([])
  
     useEffect(() => {
         async function getPost() {
@@ -24,7 +24,7 @@ function PostProvider({ children, id }) {
           }
         }
         getPost();
-      }, [id])
+      }, [])
 
     return <PostContext.Provider value={{posts, setPosts}}>{children}</PostContext.Provider>
 }
