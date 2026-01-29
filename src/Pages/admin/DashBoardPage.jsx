@@ -1,32 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import { PostContext } from "../../Context/PostProvider.jsx";
 import Stats from "../../data/DashboardData.js";
 
-const Base = import.meta.env.VITE_BASE_URL;
+
 
 function DashBoardPage() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    async function getPost() {
-      try {
-        const res = await fetch(`${Base}/api/v1/articles/`);
-        if (!res.ok) {
-          throw new Error("Failed to fetch posts");
-        }
-
-        const data = await res.json();
-
-
-        setPosts(data);
-      } catch (error) {
-        console.error("Error:", error.message);
-      }
-    }
-
-    getPost();
-  }, [Base]);
-
-console.log(posts);
+  let { posts } = useContext(PostContext);
 
   return (
     <div className="p-8 min-h-screen m-auto w-full max-w-7xl">

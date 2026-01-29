@@ -1,34 +1,14 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
+import { useContext } from 'react';
 import Button from './Button'
 import { Link } from 'react-router-dom'
-import { v4 as uuidv4 } from "uuid";
+import { PostContext } from '../Context/PostProvider';
 
-let Base = import.meta.env.VITE_BASE_URL
+
 
 function LatestPosts() {
-    let [post, setPost] = useState([])
 
-    useEffect(() => {
-        async function GetPost() {
-            try {
-                let res = await fetch(`${Base}api/v1/articles/`)
-
-                if(!res.ok){
-                    throw new Error('Apida muammo')
-                }
-                let data = await res.json()
-                setPost(data)
-            } catch (error) {
-              toast(error.message)  
-            }
-        }
-        GetPost()
-    }, [])
-console.log(post);
-
-
+  let { posts } = useContext(PostContext);
   return (
     <section className="container py-32">
       <div className="flex mb-12 justify-between items-start">
@@ -47,10 +27,10 @@ console.log(post);
         </Button>
       </div>
       <div className="grid  grid-cols-[repeat(auto-fit,minmax(293px,1fr))]  gap-8">
-        {post.slice(0, 3).map((post) => {
+        {posts?.slice(0, 3).map((post) => {
           return (
             <div
-              key={uuidv4()}
+              key={post.id}
               className="border-2 group border-gray-300 rounded-2xl duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="relative rounded-t-2xl overflow-hidden">
@@ -66,7 +46,7 @@ console.log(post);
               <div className="p-6 flex flex-col justify-between ">
                 <div className="text-[#6B7280] mb-12px flex gap-2 items-center">
                   <i className="fa-regular fa-calendar"></i>
-                  <p>{post.updated_at.slice(0, 10)}</p>
+                  <p>{post.updated_at?.slice(0, 10)}</p>
                 </div>
                 <h2 className="text-[#0F1729] group-hover:text-[#4346EF] transition text-[20px] font-bold mb-2">
                   {post.title}

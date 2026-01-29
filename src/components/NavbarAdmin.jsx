@@ -41,12 +41,13 @@ function NavbarAdmin() {
         </NavLink>
       </div>
       <div>
-          <button onClick={logAOut()}  className="p-4  border-t-2 border-[#E5E7EB] ">
-            <Link to={"/login"} className='flex items-center w-full py-3.5 px-6 rounded-2xl hover:bg-gray-100 gap-3'>
-            <i className="fa-solid fa-arrow-right-from-bracket"></i>
-            Logout
-          </Link>
-          </button>
+        <button
+          onClick={logAOut}
+          className="flex items-center w-full py-3.5 px-6 rounded-2xl hover:bg-gray-100 gap-3 border-t-2 border-[#E5E7EB]"
+        >
+          <i className="fa-solid fa-arrow-right-from-bracket"></i>
+          Logout
+        </button>
       </div>
     </div>
   );

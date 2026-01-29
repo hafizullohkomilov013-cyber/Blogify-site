@@ -1,33 +1,15 @@
 import React from 'react'
 import PostHero from '../../components/PostHero'
-import { useState, useEffect } from 'react'
-import { toast } from 'react-toastify';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-let Base = import.meta.env.VITE_BASE_URL;
-
+import {PostContext} from "../../Context/PostProvider"
 
 function PostPages() {
-  let [ inputValue, setInputValue ] = useState("")
-  let [ post, setPost] = useState([])
+  let [inputValue, setInputValue] = useState("")
+  let {posts} = useContext(PostContext)
 
-  useEffect(() => {
-    async function GetPOst() {
-      try {
-        let res = await fetch(`${Base}api/v1/articles/`)
-        if(!res.ok){
-          throw new Error('Xatolik !')
-        }
-        let data = await res.json()
-        setPost(data)
-      } catch (error) {
-        toast("Xatolik")
-      }
-    }
-    GetPOst()
-  },[])
-
-  let filtr = post.filter((item) => {
+  let filtr = posts?.filter((item) => {
     return(item.content.toLowerCase().includes(inputValue.trim().toLowerCase()))
   })
 
@@ -36,7 +18,7 @@ function PostPages() {
       <PostHero inputValue={inputValue} setInputValue={setInputValue} />
       <div className='container py-16'>
         <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtr.map((post) => {
+          {filtr?.map((post) => {
             return (
               <div
                 key={post.id}
@@ -55,7 +37,7 @@ function PostPages() {
                 <div className="p-6">
                   <div className="text-[#6B7280] mb-12px flex gap-2 items-center">
                     <i className="fa-regular fa-calendar"></i>
-                    <p>{post.updated_at.slice(0, 10)}</p>
+                    <p>{post.updated_at?.slice(0, 10)}</p>
                   </div>
                   <h2 className="text-[#0F1729] group-hover:text-[#4346EF] transition text-[20px] font-bold mb-2">
                     {post.title}
