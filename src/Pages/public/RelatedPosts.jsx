@@ -6,7 +6,6 @@ import PostCard from '../../components/PostCard';
 let Base = import.meta.env.VITE_BASE_URL;
 
 function RelatedPosts({id,}) {
-    console.log(id);
     
     let [posts, setPost] = useState([])
     console.log(posts);

@@ -16,7 +16,6 @@ function PostProvider({ children }) {
             let res = await fetch(`${Base}api/v1/articles/`);
             if (!res.ok) throw new Error("Xatolik!");
             let data = await res.json();
-            console.log(data);
             
             setPosts(data);
           } catch (error) {

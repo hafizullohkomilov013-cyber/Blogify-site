@@ -1,34 +1,23 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { PostContext } from '../../Context/PostProvider';
 import RelatedPosts from './RelatedPosts';
 
-let Base = import.meta.env.VITE_BASE_URL;
 
 function PostDetailsPages() {
+  let {posts} = useContext(PostContext);
+  console.log(posts);
+  
+
   let { hi } = useParams();
-  let [post, setPost] = useState(null);
-  let { category, title, image, id, updated_at } = post || {};
+  console.log(hi);
 
+  
+  let { category, title, image, id, updated_at } = posts && posts.find(post => post.id === Number(hi)) || {};
 
-  useEffect(() => {
-    async function getPost() {
-      try {
-        let res = await fetch(`${Base}api/v1/articles/${hi}/`);
-        if (!res.ok) throw new Error("Xatolik!");
-        let data = await res.json();
-        console.log(data);
-        
-        setPost(data);
-      } catch (error) {
-        toast.error(error.message);
-      }
-    }
-    getPost();
-  }, [hi]);
-
-  if (!post) {
+  if (posts.length == 0) {
     return <h2>Loading...</h2>;
   }
 
@@ -39,7 +28,7 @@ function PostDetailsPages() {
           <i className="fa-solid fa-arrow-left"></i> Back to Posts
         </Link>
         <div className='flex w-full mb-16 max-w-208 mx-auto flex-col justify-center'>
-            <p className='text-white bg-[#4346EF] mb-4 py-0.5 px-2.5 rounded-2xl w-fit'>{category.name}</p>
+            <p className='text-white bg-[#4346EF] mb-4 py-0.5 px-2.5 rounded-2xl w-fit'>{category?.name}</p>
             <h1 className='text-[#0F1729] mb-4 text-[60px] font-bold'>{title}</h1>
             <div className='flex gap-4 mb-8'>
               <div className='flex  items-center gap-2 text-[#6B7280]'>
@@ -47,7 +36,7 @@ function PostDetailsPages() {
               </div>
               <div className='flex  items-center gap-2 text-[#6B7280]'>
                 <i className="fa-regular fa-calendar"></i>
-                <p>{updated_at.slice(0,10 )}</p>
+                <p>{updated_at?.slice(0,10 )}</p>
               </div>
             </div>
             <img className='rounded-b-2xl' src={image} alt="" />
@@ -56,7 +45,7 @@ function PostDetailsPages() {
             </p>
         </div>
       </div>
-      <RelatedPosts post={post} id={id} />
+      <RelatedPosts post={posts} id={id} />
     </section>
   );
 }

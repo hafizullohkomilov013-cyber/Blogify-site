@@ -82,11 +82,9 @@ function LoginPage() {
                   ref={paswordRef}
                 />
               </label>
-
-              {/* LOGIN BUTTON */}
               <button
                 type="submit"
-                disabled={loading} // disabled qilamiz
+                disabled={loading}
                 className={`text-white cursor-pointer rounded-2xl w-full py-3 bg-[#4346EF] flex justify-center items-center ${
                   loading ? "opacity-70" : ""
                 }`}
