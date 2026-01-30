@@ -24,7 +24,7 @@ function Footer() {
             <Link className="link-cursor" to={"/PostPages"}>
               Posts
             </Link>
-            <Link className="link-cursor" to={"/"}>
+            <Link className="link-cursor" to={"/login"}>
               Login
             </Link>
           </div>

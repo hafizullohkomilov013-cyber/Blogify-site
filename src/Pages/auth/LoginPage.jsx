@@ -11,11 +11,11 @@ function LoginPage() {
   let emailRef = useRef("");
   let paswordRef = useRef("");
   let navigate = useNavigate();
-  const [loading, setLoading] = useState(false); // loading state
+  const [loading, setLoading] = useState(false);
 
   async function hendleSubmit(e) {
     e.preventDefault();
-    setLoading(true); // spinnerni yoqish
+    setLoading(true);
     try {
       let res = await fetch(`${Base}/auth/login/`, {
         method: "POST",
@@ -38,7 +38,7 @@ function LoginPage() {
     } catch (error) {
       toast.error(error.message);
     } finally {
-      setLoading(false); // spinnerni o‘chirish
+      setLoading(false); 
     }
   }
 

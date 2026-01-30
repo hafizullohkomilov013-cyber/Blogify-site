@@ -69,15 +69,15 @@ function NavbarAdmin() {
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100"
+                className="px-4 py-2 cursor-pointer rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100"
               >
                 Yo‘q
               </button>
               <button
                 onClick={logAOut}
-                className="px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600"
+                className="px-4 py-2 cursor-pointer rounded-xl bg-red-500 text-white hover:bg-red-600"
               >
-                Ha, chiqaman
+                Ha
               </button>
             </div>
           </div>

@@ -5,8 +5,11 @@ function PostCard({ post }) {
   console.log(post);
 
   return (
-    <div className="container">
-      <div className="border-2  group border-gray-300 rounded-2xl duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
+    <div>
+      <Link
+        to={`/PostDetailsPages/${post.id}`}
+        className="border-2 inline-block  group border-gray-300 rounded-2xl duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl"
+      >
         <div className="relative rounded-t-2xl overflow-hidden">
           <h2 className="bg-[#4346EF] z-2 py-0.5 px-2.5 rounded-2xl text-white absolute top-5 left-4">
             {post.category?.name}
@@ -27,15 +30,14 @@ function PostCard({ post }) {
           </h2>
           <p className="text-[#6B7280] mb-4">{post.content}</p>
           <div className="text-[#4346EF]">
-            <Link
+            <button
               className="flex justify-start items-center gap-1 group-hover:gap-2.5"
-              to={`/PostDetailsPages/${post.id}`}
             >
               Read more <i className="text-[16px] fa-solid fa-arrow-right"></i>
-            </Link>
+            </button>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
