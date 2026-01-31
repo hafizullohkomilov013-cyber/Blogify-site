@@ -5,8 +5,6 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 function NavbarAdmin() {
   let navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-
-  // Ha bosilganda
   let logAOut = () => {
     localStorage.removeItem("token");
     navigate("/login");

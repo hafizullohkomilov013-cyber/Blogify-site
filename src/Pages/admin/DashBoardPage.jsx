@@ -9,7 +9,7 @@ function DashBoardPage() {
 
   return (
     <div className="p-8 min-h-screen m-auto w-full max-w-7xl">
-      <div className="mb-8">
+      <div className="mb-5">
         <h1 className="text-[#0F1729] text-[30px] font-bold mb-2">Dashboard</h1>
         <p className="text-[#6B7280] text-sm">
           Welcome back! Here's an overview of your blog.
@@ -35,7 +35,7 @@ function DashBoardPage() {
         ))}
       </div>
       <div className="w-full bg-white rounded-xl shadow-sm border-2 border-gray-200 p-6">
-        <div className="mb-6">
+        <div className="mb-3">
           <h2 className="text-[20px] mb-1 font-semibold text-[#0F1724]">
             Recent Posts
           </h2>
@@ -46,38 +46,41 @@ function DashBoardPage() {
 
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b text-left text-sm text-gray-500">
-                <th className="p-4 font-medium">Title</th>
-                <th className="p-4 font-medium">Category</th>
-                <th className="p-4 font-medium">Date</th>
-                <th className="p-4 font-medium">Status</th>
+            <thead className="table w-full table-fixed">
+              <tr className="border-b  text-left text-sm text-gray-500">
+                <th className="p-4 text-start font-medium">Title</th>
+                <th className="p-4 text-center font-medium">Category</th>
+                <th className="p-4 text-center font-medium">Date</th>
+                <th className="p-4 text-start font-medium">Status</th>
                 <th className="p-4 font-medium text-right">Actions</th>
               </tr>
             </thead>
 
-            <tbody className="text-sm">
+            <tbody className="text-sm block max-h-[232px] overflow-y-auto">
               {posts.length === 0 ? (
-                <tr>
-                  <td className="py-6 text-center text-gray-500">
+                <tr className="table w-full">
+                  <td colSpan="5" className="py-6 text-center text-gray-500">
                     No posts found
                   </td>
                 </tr>
               ) : (
                 posts.map((post) => (
-                  <tr key={post.id} className="border-b hover:bg-gray-50">
+                  <tr
+                    key={post.id}
+                    className="border-b hover:bg-gray-50 table w-full table-fixed"
+                  >
                     <td className="p-4 font-medium text-gray-900">
                       {post.title}
                     </td>
 
-                    <td className="p-4">
+                    <td className="p-4 text-center">
                       <span className="px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-600">
                         {post.category?.name}
                       </span>
                     </td>
 
-                    <td className="p-4 text-gray-500">
-                      {post.updated_at.slice(0, 10)}
+                    <td className="p-4 text-center text-gray-500">
+                      {post.updated_at?.slice(0, 10)}
                     </td>
 
                     <td className="p-4">
