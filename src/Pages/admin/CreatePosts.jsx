@@ -49,11 +49,6 @@ function CreatePosts() {
         throw new Error("Post yaratishda xato");
       }
       toast.success("Post muvaffaqiyatli yaratildi");
-      TitleRef.current.value = "";
-      ContentRef.current.value = "";
-      ImgRef.current.value = "";
-      setCategory(null);
-      setLoading(false);
     } catch (error) {
       toast.error(error.message);
     }
