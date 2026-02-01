@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import FileImg from "../../assets/img/FileIcon.svg";
-import { useState, useRef } from "react";
-
 import Select from "react-select";
 import { toast } from "react-toastify/unstyled";
 
@@ -16,30 +14,56 @@ const options = [
 ];
 
 function CreatePosts() {
-  let TitleRef = useRef();
-  let ContentRef = useRef();
-  let ImgRef = useRef();
+  const TitleRef = useRef();
+  const ContentRef = useRef();
+  const ImgRef = useRef();
 
   const [category, setCategory] = useState(null);
-
-
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    let token = JSON.parse(localStorage.getItem("token"));
+    // Token tekshirish
+    const tokenString = localStorage.getItem("token");
+    if (!tokenString) {
+      toast.error("Avval login qiling");
+      setLoading(false);
+      return;
+    }
 
-    let formData = new FormData();
+    let token;
+    try {
+      token = JSON.parse(tokenString);
+    } catch {
+      toast.error("Token noto‘g‘ri");
+      setLoading(false);
+      return;
+    }
+
+    if (!token?.access) {
+      toast.error("Avval login qiling");
+      setLoading(false);
+      return;
+    }
+
+    if (!category) {
+      toast.error("Category tanlang");
+      setLoading(false);
+      return;
+    }
+
+    const formData = new FormData();
     formData.append("title", TitleRef.current.value);
     formData.append("content", ContentRef.current.value);
-    formData.append("category", category.value);
-    formData.append("image", ImgRef.current.files[0]); 
-    console.log(formData);
-    
+    formData.append("category", category.value); // backend kutgan format
+    if (ImgRef.current.files[0]) {
+      formData.append("image", ImgRef.current.files[0]);
+    }
+
     try {
-      let res = await fetch(`${Base}/api/v1/articles/`, {
+      const res = await fetch(`${Base}/api/v1/articles/`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token.access}`,
@@ -48,16 +72,24 @@ function CreatePosts() {
       });
 
       if (!res.ok) {
-        throw new Error("Xatolik");
+        throw new Error("Xatolik: Ma'lumot yuborilmadi");
       }
-      let data = await res.json();
+
+      const data = await res.json();
       console.log(data);
+      toast.success("Post muvoffaqqiyatli joylandi");
+
+      TitleRef.current.value = "";
+      ContentRef.current.value = "";
+      setCategory(null);
+      ImgRef.current.value = "";
     } catch (error) {
-      toast(error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className="mx-auto w-full max-w-225">
       <div className="mb-8">
@@ -84,22 +116,28 @@ function CreatePosts() {
               <span>Content</span>
               <textarea
                 ref={ContentRef}
-                className="outline-none h-100  border-gray-300 border-2 rounded-2xl p-3"
+                className="outline-none h-100 border-gray-300 border-2 rounded-2xl p-3"
                 placeholder="Write your post content here..."
               ></textarea>
             </label>
           </div>
+
           <div className="w-70 flex flex-col gap-6">
-            <div className="border-2 w-full  flex flex-col   p-6 rounded-2xl border-gray-300">
+            <div className="border-2 w-full flex flex-col p-6 rounded-2xl border-gray-300">
               <h2 className="text-[#0F1729] text-[30px] font-semibold mb-4">
                 Post Settings
               </h2>
               <label className="flex flex-col gap-3">
                 <span>Category</span>
-                <Select onChange={setCategory} options={options} />
+                <Select
+                  value={category}
+                  onChange={setCategory}
+                  options={options}
+                />
               </label>
             </div>
-            <div className="border-2 w-full h-75.5  flex flex-col   p-6 rounded-2xl border-gray-300">
+
+            <div className="border-2 w-full h-75.5 flex flex-col p-6 rounded-2xl border-gray-300">
               <h2 className="text-[#0F1729] text-[30px] font-semibold mb-4">
                 Featured Image
               </h2>
@@ -110,6 +148,7 @@ function CreatePosts() {
                 </label>
               </div>
             </div>
+
             <button
               type="submit"
               disabled={loading}

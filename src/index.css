@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Inder&display=swap");
 
+*{
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Inder', sans-serif;
   overflow-x: hidden;

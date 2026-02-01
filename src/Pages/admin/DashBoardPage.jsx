@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import { PostContext } from "../../Context/PostProvider.jsx";
 import Stats from "../../data/DashboardData.js";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 let Base = import.meta.env.VITE_BASE_URL;
 
 function DashBoardPage() {
+  const [showModal, setShowModal] = useState(false);
   let { posts } = useContext(PostContext);
 
   let token = JSON.parse(localStorage.getItem('token'))
@@ -22,9 +24,7 @@ function DashBoardPage() {
       if(!res.ok){
         throw new Error('Xatolik')
       }
-      let data = await res.json()
-      console.log(data);
-      
+      toast(`${id}-iddagi post o'chirildi`)
     } catch (error) {
       toast(error.message)
     }
@@ -122,10 +122,36 @@ function DashBoardPage() {
                       <button className="text-blue-600 cursor-pointer  hover:underline">
                         Edit
                       </button>
-                      <button onClick={() => deletePost(post.id)} className="text-red-500  cursor-pointer hover:underline">
+                      <button
+                        onClick={() => setShowModal(true)}
+                        className="text-red-500  cursor-pointer hover:underline"
+                      >
                         Delete
                       </button>
                     </td>
+                    {showModal && (
+                      <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+                        <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-lg">
+                          <h2 className="text-lg font-semibold text-[#0F1729] mb-2">
+                           { `Rostan ham ${post.title} postni o'chirmoqchimisz?`}
+                          </h2>
+                          <div className="flex justify-end gap-3">
+                            <button
+                              onClick={() => setShowModal(false)}
+                              className="px-4 py-2 cursor-pointer rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100"
+                            >
+                              Yo‘q
+                            </button>
+                            <button
+                              onClick={()=> deletePost(post.id) && setShowModal(false)}
+                              className="px-4 py-2 cursor-pointer rounded-xl bg-red-500 text-white hover:bg-red-600"
+                            >
+                              Ha
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </tr>
                 ))
               )}
