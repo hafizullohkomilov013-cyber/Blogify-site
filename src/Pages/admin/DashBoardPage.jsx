@@ -1,11 +1,34 @@
 import React, { useContext } from "react";
 import { PostContext } from "../../Context/PostProvider.jsx";
 import Stats from "../../data/DashboardData.js";
+import { toast } from "react-toastify";
 
-
+let Base = import.meta.env.VITE_BASE_URL;
 
 function DashBoardPage() {
   let { posts } = useContext(PostContext);
+
+  let token = JSON.parse(localStorage.getItem('token'))
+
+  async function deletePost(id){
+    console.log(id);
+    try {
+      let res = await fetch(`${Base}api/v1/articles/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token.access}`,
+        },
+      });
+      if(!res.ok){
+        throw new Error('Xatolik')
+      }
+      let data = await res.json()
+      console.log(data);
+      
+    } catch (error) {
+      toast(error.message)
+    }
+  }
 
   return (
     <div className="p-8 min-h-screen m-auto w-full max-w-7xl">
@@ -96,10 +119,10 @@ function DashBoardPage() {
                     </td>
 
                     <td className="p-4 text-right space-x-3">
-                      <button className="text-blue-600 hover:underline">
+                      <button className="text-blue-600 cursor-pointer  hover:underline">
                         Edit
                       </button>
-                      <button className="text-red-500 hover:underline">
+                      <button onClick={() => deletePost(post.id)} className="text-red-500  cursor-pointer hover:underline">
                         Delete
                       </button>
                     </td>
