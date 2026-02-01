@@ -18,8 +18,10 @@ const options = [
 function CreatePosts() {
   let TitleRef = useRef();
   let ContentRef = useRef();
-  let CatagoryRef = useRef();
   let ImgRef = useRef();
+
+  const [category, setCategory] = useState(null);
+
 
   const [loading, setLoading] = useState(false);
 
@@ -30,17 +32,17 @@ function CreatePosts() {
     let token = JSON.parse(localStorage.getItem("token"));
 
     let formData = new FormData();
-    formData.append("title", titleRef.current.value);
-    formData.append("content", contentRef.current.value);
-    formData.append("category", categoryRef.current.value);
-    formData.append("image", imgRef.current.files[ø]); 
+    formData.append("title", TitleRef.current.value);
+    formData.append("content", ContentRef.current.value);
+    formData.append("category", category.value);
+    formData.append("image", ImgRef.current.files[0]); 
     console.log(formData);
     
     try {
-      let res = await fetch(`${Base}api/v1/articles/`, {
+      let res = await fetch(`${Base}/api/v1/articles/`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token.acces}`,
+          Authorization: `Bearer ${token.access}`,
         },
         body: formData,
       });
@@ -94,7 +96,7 @@ function CreatePosts() {
               </h2>
               <label className="flex flex-col gap-3">
                 <span>Category</span>
-                <Select ref={CatagoryRef} options={options} />
+                <Select onChange={setCategory} options={options} />
               </label>
             </div>
             <div className="border-2 w-full h-75.5  flex flex-col   p-6 rounded-2xl border-gray-300">
