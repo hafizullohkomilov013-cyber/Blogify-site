@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
 import FileImg from "../../assets/img/FileIcon.svg";
 import Select from "react-select";
-import { toast } from "react-toastify/unstyled";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 let Base = import.meta.env.VITE_BASE_URL;
 
@@ -25,70 +27,37 @@ function CreatePosts() {
     e.preventDefault();
     setLoading(true);
 
-    // Token tekshirish
-    const tokenString = localStorage.getItem("token");
-    if (!tokenString) {
-      toast.error("Avval login qiling");
-      setLoading(false);
-      return;
-    }
+    const token = JSON.parse(localStorage.getItem("token"));
+    console.log(token.access);
 
-    let token;
-    try {
-      token = JSON.parse(tokenString);
-    } catch {
-      toast.error("Token noto‘g‘ri");
-      setLoading(false);
-      return;
-    }
 
-    if (!token?.access) {
-      toast.error("Avval login qiling");
-      setLoading(false);
-      return;
-    }
-
-    if (!category) {
-      toast.error("Category tanlang");
-      setLoading(false);
-      return;
-    }
 
     const formData = new FormData();
     formData.append("title", TitleRef.current.value);
     formData.append("content", ContentRef.current.value);
-    formData.append("category", category.value); // backend kutgan format
-    if (ImgRef.current.files[0]) {
-      formData.append("image", ImgRef.current.files[0]);
-    }
-
+    formData.append("category", Number(category.value));
+    formData.append("image", ImgRef.current.files[0]);
     try {
-      const res = await fetch(`${Base}/api/v1/articles/`, {
+      const res = await fetch(`${Base}api/v1/articles/`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token.access}`,
         },
         body: formData,
       });
-
       if (!res.ok) {
-        throw new Error("Xatolik: Ma'lumot yuborilmadi");
+        throw new Error("Post yaratishda xato");
       }
-
-      const data = await res.json();
-      console.log(data);
-      toast.success("Post muvoffaqqiyatli joylandi");
-
+      toast.success("Post muvaffaqiyatli yaratildi");
       TitleRef.current.value = "";
       ContentRef.current.value = "";
-      setCategory(null);
       ImgRef.current.value = "";
+      setCategory(null);
+      setLoading(false);
     } catch (error) {
       toast.error(error.message);
-    } finally {
-      setLoading(false);
     }
-  };
+  }  
 
   return (
     <div className="mx-auto w-full max-w-225">
