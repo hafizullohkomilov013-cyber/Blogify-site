@@ -8,7 +8,7 @@ function AdminLayout() {
       <div>
         <NavbarAdmin/>
       </div>
-      <div>
+      <div className='flex grow-2'>
         <Outlet/>   
       </div>
     </div>
