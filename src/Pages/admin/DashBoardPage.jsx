@@ -79,7 +79,7 @@ function DashBoardPage() {
               </tr>
             </thead>
 
-            <tbody className="text-sm block max-h-[232px] overflow-y-auto">
+            <tbody className="text-sm block max-h-58 overflow-y-auto">
               {posts.length === 0 ? (
                 <tr className="table w-full">
                   <td colSpan="5" className="py-6 text-center text-gray-500">
