@@ -15,7 +15,7 @@ function PostDetailsPages() {
   console.log(hi);
 
   
-  let { category, title, image, id, updated_at } = posts && posts.find(post => post.id === Number(hi)) || {};
+  let { category,content,  title, image, id, updated_at } = posts && posts.find(post => post.id === Number(hi)) || {};
 
   if (posts.length == 0) {
     return <h2>Loading...</h2>;
@@ -45,20 +45,9 @@ function PostDetailsPages() {
             </div>
           </div>
           <img className="rounded-b-2xl" src={image} alt="" />
-          <p className="text-[#6B7280] text-[20px] leading-7 mt-7">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore
-            magnam vel, nemo numquam voluptatibus beatae blanditiis sequi
-            voluptatem fugit saepe eum quidem dolores odit atque illo quam
-            labore animi porro nesciunt natus repellendus harum inventore
-            possimus aperiam! Ratione at ex porro minima voluptas dignissimos
-            nobis nisi, atque, autem amet a! Lorem ipsum dolor sit amet
-            consectetur, adipisicing elit. Reiciendis a, sunt ducimus, nemo
-            adipisci sint unde autem vero maxime, esse eligendi expedita
-            pariatur natus porro vitae consequuntur? Possimus nostrum provident
-            impedit eligendi ullam explicabo dolor minima nobis quod corrupti
-            expedita ipsam maiores eveniet incidunt, dolorum excepturi molestias
-            id aspernatur eum.
-          </p>
+          <pre className="text-[#6B7280] text-[20px] leading-7 mt-7">
+            {content}
+          </pre>
         </div>
       </div>
       <div className='container'>

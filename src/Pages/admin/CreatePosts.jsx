@@ -35,7 +35,7 @@ function CreatePosts() {
     const formData = new FormData();
     formData.append("title", TitleRef.current.value);
     formData.append("content", ContentRef.current.value);
-    formData.append("category", Number(category.value));
+    formData.append("category", category.value);
     formData.append("image", ImgRef.current.files[0]);
     try {
       const res = await fetch(`${Base}api/v1/articles/`, {
@@ -45,6 +45,8 @@ function CreatePosts() {
         },
         body: formData,
       });
+      console.log(res);
+      
       if (!res.ok) {
         throw new Error("Post yaratishda xato");
       }
@@ -75,6 +77,7 @@ function CreatePosts() {
             <label className="flex flex-col gap-3">
               <span>Post Title</span>
               <input
+              required
                 ref={TitleRef}
                 className="outline-none border-gray-300 border-2 rounded-2xl p-3"
                 type="text"
@@ -84,6 +87,7 @@ function CreatePosts() {
             <label className="flex flex-col gap-3">
               <span>Content</span>
               <textarea
+              required
                 ref={ContentRef}
                 className="outline-none h-100 border-gray-300 border-2 rounded-2xl p-3"
                 placeholder="Write your post content here..."
@@ -99,6 +103,7 @@ function CreatePosts() {
               <label className="flex flex-col gap-3">
                 <span>Category</span>
                 <Select
+                required
                   value={category}
                   onChange={setCategory}
                   options={options}
@@ -113,7 +118,7 @@ function CreatePosts() {
               <div className="text-center flex h-full flex-col justify-center items-center">
                 <label className="text-center border-gray-400 border-2 border-dashed rounded-2xl w-full h-full cursor-pointer flex flex-col justify-center items-center">
                   <img className="mb-4" src={FileImg} alt="" />
-                  <input ref={ImgRef} className="w-50" type="file" />
+                  <input required ref={ImgRef} className="w-50" type="file" />
                 </label>
               </div>
             </div>
