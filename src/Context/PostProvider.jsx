@@ -13,7 +13,7 @@ function PostProvider({ children }) {
     useEffect(() => {
         async function getPost() {
           try {
-            let res = await fetch(`${Base}api/v1/articles/`);
+            let res = await fetch(`${Base}/api/v1/articles/`);
             if (!res.ok) throw new Error("Xatolik!");
             let data = await res.json();
             

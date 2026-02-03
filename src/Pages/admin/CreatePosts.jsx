@@ -1,26 +1,18 @@
 import React, { useState, useRef } from "react";
 import FileImg from "../../assets/img/FileIcon.svg";
-import Select from "react-select";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
 let Base = import.meta.env.VITE_BASE_URL;
 
-const options = [
-  { value: "1", label: "Technology" },
-  { value: "2", label: "Productivity" },
-  { value: "3", label: "Design" },
-  { value: "4", label: "Business" },
-  { value: "5", label: "Lifestyle" },
-];
 
 function CreatePosts() {
   const TitleRef = useRef();
   const ContentRef = useRef();
   const ImgRef = useRef();
+  const CatecoryRef = useRef()
 
-  const [category, setCategory] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -35,16 +27,19 @@ function CreatePosts() {
     const formData = new FormData();
     formData.append("title", TitleRef.current.value);
     formData.append("content", ContentRef.current.value);
-    formData.append("category", category.value);
+    formData.append("category", CatecoryRef.current.value);
     formData.append("image", ImgRef.current.files[0]);
     try {
-      const res = await fetch(`${Base}api/v1/articles/`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token.access}`,
+      const res = await fetch(
+        `https://alijonov0901.pythonanywhere.com/api/v1/articles/`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token.access}`,
+          },
+          body: formData,
         },
-        body: formData,
-      });
+      );
       console.log(res);
       
       if (!res.ok) {
@@ -54,7 +49,6 @@ function CreatePosts() {
       TitleRef.current.value = "";
       ContentRef.current.value = "";
       ImgRef.current.value = "";
-      setCategory(null);
       setLoading(false);
     } catch (error) {
       toast.error(error.message);
@@ -102,12 +96,13 @@ function CreatePosts() {
               </h2>
               <label className="flex flex-col gap-3">
                 <span>Category</span>
-                <Select
-                required
-                  value={category}
-                  onChange={setCategory}
-                  options={options}
-                />
+                <select ref={CatecoryRef} >
+                  <optgroup value="1">Technology</optgroup>
+                  <option value="2">Productivity</option>
+                  <option value="3">Design</option>
+                  <option value="4">Business</option>
+                  <option value="5">Lifestyle</option>
+                </select>
               </label>
             </div>
 
@@ -124,6 +119,8 @@ function CreatePosts() {
             </div>
 
             <button
+            onClick={() => console.log(formData)
+            }
               type="submit"
               disabled={loading}
               className={`text-white cursor-pointer rounded-2xl w-full py-3 bg-[#4346EF] flex justify-center items-center ${

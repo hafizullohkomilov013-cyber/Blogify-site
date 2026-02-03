@@ -5,32 +5,27 @@ import { useParams } from "react-router-dom";
 import FileImg from "../../assets/img/FileIcon.svg";
 import { toast } from "react-toastify";
 
-const options = [
-  { value: "1", label: "Technology" },
-  { value: "2", label: "Productivity" },
-  { value: "3", label: "Design" },
-  { value: "4", label: "Business" },
-  { value: "5", label: "Lifestyle" },
-];
 
 let Base = import.meta.env.VITE_BASE_URL;
 
 function EditPage() {
   let { id } = useParams();
-  const [category, setCategory] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const token = JSON.parse(localStorage.getItem("token"));
   console.log(token.access);
+  console.log( id);
+  
 
   const TitleRef = useRef();
   const ContentRef = useRef();
   const ImgRef = useRef();
+  const CategoryRef= useRef()
 
   useEffect(() =>{
     async function getPostId() {
       try {
-        let res = await fetch(`${Base}api/v1/articles/${id}`, {
+        let res = await fetch(`${Base}/api/v1/articles/${Number(id)}/`, {
           headers: {
             Authorization: `Bearer ${token.access}`,
           },
@@ -42,8 +37,7 @@ function EditPage() {
       console.log(data);
       TitleRef.current.value = data.title;
       ContentRef.current.value = data.content;
-
-      setCategory(options.find((opt) => opt.value == data.category));
+      CategoryRef.current.value = data.category
 
       
       } catch (error) {
@@ -65,10 +59,13 @@ function EditPage() {
       const formData = new FormData();
       formData.append("title", TitleRef.current.value);
       formData.append("content", ContentRef.current.value);
-      formData.append("category", category.value);
-      formData.append("image", ImgRef.current.files[0]);
+      formData.append("category", CategoryRef.current.value);
+      if (ImgRef.current.files.length > 0) {
+        formData.append("image", ImgRef.current.files[0]);
+      }
+
       try {
-        const res = await fetch(`${Base}api/v1/articles/${id}`, {
+        const res = await fetch(`${Base}/api/v1/articles/${Number(id)}/`, {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${token.access}`,
@@ -84,7 +81,6 @@ function EditPage() {
         TitleRef.current.value = "";
         ContentRef.current.value = "";
         ImgRef.current.value = "";
-        setCategory(null);
         setLoading(false);
       } catch (error) {
         toast.error(error.message);
@@ -132,12 +128,13 @@ function EditPage() {
               </h2>
               <label className="flex flex-col gap-3">
                 <span>Category</span>
-                <Select
-                  options={options}
-                  required
-                  value={category}
-                  onChange={setCategory}
-                />
+                <select ref={CategoryRef}>
+                  <option value={1}>Technology</option>
+                  <option value={2}>Productivity</option>
+                  <option value={3}>Design</option>
+                  <option value={4}>Business</option>
+                  <option value={5}>Lifestyle</option>
+                </select>
               </label>
             </div>
 
@@ -148,7 +145,7 @@ function EditPage() {
               <div className="text-center flex h-full flex-col justify-center items-center">
                 <label className="text-center border-gray-400 border-2 border-dashed rounded-2xl w-full h-full cursor-pointer flex flex-col justify-center items-center">
                   <img className="mb-4" src={FileImg} alt="" />
-                  <input ref={ImgRef}className="w-50" type="file" />
+                  <input ref={ImgRef} className="w-50" type="file" />
                 </label>
               </div>
             </div>

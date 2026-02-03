@@ -14,7 +14,7 @@ function RelatedPosts({id,}) {
     useEffect(() => {
         async function getPost() {
             try {
-                let res = await fetch(`${Base}api/v1/articles/`);
+                let res = await fetch(`${Base}/api/v1/articles/`);
                 if (!res.ok) {
                   throw new Error("Xatolik !");
                 }

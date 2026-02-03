@@ -21,7 +21,7 @@
     async function deletePost(id){
       console.log(id);
       try {
-        let res = await fetch(`${Base}api/v1/articles/${id}`, {
+        let res = await fetch(`${Base}/api/v1/articles/${id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token.access}`,
