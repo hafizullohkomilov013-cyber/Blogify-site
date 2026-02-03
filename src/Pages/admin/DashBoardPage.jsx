@@ -3,10 +3,14 @@
   import Stats from "../../data/DashboardData.js";
   import { toast } from "react-toastify";
   import { useState } from "react";
+  import { useNavigate } from "react-router-dom";
 
   let Base = import.meta.env.VITE_BASE_URL;
 
   function DashBoardPage() {
+
+    const navigate = useNavigate();
+
     const [showModal, setShowModal] = useState(false);
     const [selectedPost, setSelectedPost] = useState(null);
 
@@ -37,7 +41,9 @@
     return (
       <div className="p-8 min-h-screen m-auto w-full max-w-7xl">
         <div className="mb-5">
-          <h1 className="text-[#0F1729] text-[30px] font-bold mb-2">Dashboard</h1>
+          <h1 className="text-[#0F1729] text-[30px] font-bold mb-2">
+            Dashboard
+          </h1>
           <p className="text-[#6B7280] text-sm">
             Welcome back! Here's an overview of your blog.
           </p>
@@ -123,7 +129,10 @@
                       </td>
 
                       <td className="p-4 text-right space-x-3">
-                        <button className="text-blue-600 cursor-pointer  hover:underline">
+                        <button
+                          onClick={() => navigate(`/admin/editPage/${post.id}`)}
+                          className="text-blue-600 cursor-pointer  hover:underline"
+                        >
                           Edit
                         </button>
                         <button
@@ -140,36 +149,36 @@
                   ))
                 )}
               </tbody>
-              </table>
-              {showModal && selectedPost && (
-                <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-                  <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-lg">
-                    <h2 className="text-lg font-semibold mb-4">
-                      Rostan ham <b>{selectedPost.title}</b> postni
-                      o‘chirmoqchimisiz?
-                    </h2>
+            </table>
+            {showModal && selectedPost && (
+              <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+                <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-lg">
+                  <h2 className="text-lg font-semibold mb-4">
+                    Rostan ham <b>{selectedPost.title}</b> postni
+                    o‘chirmoqchimisiz?
+                  </h2>
 
-                    <div className="flex justify-end gap-3">
-                      <button
-                        onClick={() => setShowModal(false)}
-                        className="px-4 py-2 cursor-pointer rounded-xl border"
-                      >
-                        Yo‘q
-                      </button>
+                  <div className="flex justify-end gap-3">
+                    <button
+                      onClick={() => setShowModal(false)}
+                      className="px-4 py-2 cursor-pointer rounded-xl border"
+                    >
+                      Yo‘q
+                    </button>
 
-                      <button
-                        onClick={async () => {
-                          await deletePost(selectedPost.id);
-                          setShowModal(false);
-                        }}
-                        className="px-4 py-2 cursor-pointer rounded-xl bg-red-500 text-white"
-                      >
-                        Ha
-                      </button>
-                    </div>
+                    <button
+                      onClick={async () => {
+                        await deletePost(selectedPost.id);
+                        setShowModal(false);
+                      }}
+                      className="px-4 py-2 cursor-pointer rounded-xl bg-red-500 text-white"
+                    >
+                      Ha
+                    </button>
                   </div>
                 </div>
-              )}
+              </div>
+            )}
           </div>
         </div>
       </div>

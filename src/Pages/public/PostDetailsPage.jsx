@@ -45,9 +45,9 @@ function PostDetailsPages() {
             </div>
           </div>
           <img className="rounded-b-2xl" src={image} alt="" />
-          <pre className="text-[#6B7280] text-[20px] leading-7 mt-7">
+          '<pre className="text-[#6B7280] text-[20px] leading-7 mt-7">
             {content}
-          </pre>
+          </pre>'
         </div>
       </div>
       <div className='container'>

@@ -10,6 +10,7 @@ import AdminLayout from "./Layouts/AdminLayout";
 import DashBoardPage from "./Pages/admin/DashBoardPage";
 import CreatePosts from "./Pages/admin/CreatePosts";
 import ProtectRouter from "./components/ProtectRouter";
+import EditPage from "./Pages/admin/EditPage";
 
 function App() {
   let routes = createBrowserRouter([
@@ -57,6 +58,10 @@ function App() {
           path: "createPosts",
           element: <CreatePosts />,
         },
+        {
+          path:"editPage/:id",
+          element:<EditPage/>
+        }
       ],
     },
   ]);
