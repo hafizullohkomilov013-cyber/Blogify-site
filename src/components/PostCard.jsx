@@ -26,7 +26,7 @@ function PostCard({ post }) {
             <p>{post.updated_at?.slice(0, 10)}</p>
           </div>
           <h2 className="text-[#0F1729] group-hover:text-[#4346EF] transition text-[20px] font-bold mb-2">
-            {post.title}
+            {post.title?.split(" ").slice(0, 4).join(" ")}
           </h2>
           <p className="text-[#6B7280] mb-4">{post.content?.split(" ").slice(0,10).join(" ")}</p>
           <div className="text-[#4346EF]">
