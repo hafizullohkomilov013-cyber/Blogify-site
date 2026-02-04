@@ -109,11 +109,8 @@ function CreatePosts() {
               "
                 >
                   <optgroup>Select category</optgroup>
-                  <option value="1">Technology</option>
-                  <option value="2">Productivity</option>
-                  <option value="3">Design</option>
-                  <option value="4">Business</option>
-                  <option value="5">Lifestyle</option>
+                  <option value="1">test 1</option>
+                  <option value="2">test 2</option>
                 </select>
               </label>
             </div>

@@ -28,7 +28,7 @@ function PostCard({ post }) {
           <h2 className="text-[#0F1729] line-clamp-1 group-hover:text-[#4346EF] transition text-[20px] font-bold mb-2">
             {post.title}
           </h2>
-          <p className="text-[#6B7280] mb-4 line-clamp-2">{post.content}</p>
+          <p className="text-[#6B7280] mb-4 line-clamp-2 w-full">{post.content}</p>
           <div className="text-[#4346EF]">
             <button
               className="flex justify-start items-center gap-1 group-hover:gap-2.5"
