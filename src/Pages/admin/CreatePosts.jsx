@@ -1,3 +1,60 @@
+import React, { useState, useRef } from "react";
+import FileImg from "../../assets/img/FileIcon.svg";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+let Base = import.meta.env.VITE_BASE_URL;
+
+
+function CreatePosts() {
+  const TitleRef = useRef();
+  const ContentRef = useRef();
+  const ImgRef = useRef();
+  const CatecoryRef = useRef()
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const token = JSON.parse(localStorage.getItem("token"));
+    console.log(token.access);
+
+
+
+    const formData = new FormData();
+    formData.append("title", TitleRef.current.value);
+    formData.append("content", ContentRef.current.value);
+    formData.append("category", CatecoryRef.current.value);
+    formData.append("image", ImgRef.current.files[0]);
+    try {
+      const res = await fetch(
+        `${Base}/api/v1/articles/`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token.access}`,
+          },
+          body: formData,
+        },
+      );
+      console.log(res);
+      
+      if (!res.ok) {
+        throw new Error("Post yaratishda xato");
+      }
+      toast.success("Post muvaffaqiyatli yaratildi");
+      TitleRef.current.value = "";
+      ContentRef.current.value = "";
+      ImgRef.current.value = "";
+      CatecoryRef.current.value = ""
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }  
 
   return (
     <div className="mx-auto w-full max-w-225">
