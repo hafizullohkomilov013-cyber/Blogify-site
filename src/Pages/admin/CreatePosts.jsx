@@ -31,7 +31,7 @@ function CreatePosts() {
     formData.append("image", ImgRef.current.files[0]);
     try {
       const res = await fetch(
-        `https://alijonov0901.pythonanywhere.com/api/v1/articles/`,
+        `${Base}/api/v1/articles/`,
         {
           method: "POST",
           headers: {
@@ -49,6 +49,7 @@ function CreatePosts() {
       TitleRef.current.value = "";
       ContentRef.current.value = "";
       ImgRef.current.value = "";
+      CatecoryRef.current.value = ""
       setLoading(false);
     } catch (error) {
       toast.error(error.message);
@@ -71,7 +72,7 @@ function CreatePosts() {
             <label className="flex flex-col gap-3">
               <span>Post Title</span>
               <input
-              required
+                required
                 ref={TitleRef}
                 className="outline-none border-gray-300 border-2 rounded-2xl p-3"
                 type="text"
@@ -81,7 +82,7 @@ function CreatePosts() {
             <label className="flex flex-col gap-3">
               <span>Content</span>
               <textarea
-              required
+                required
                 ref={ContentRef}
                 className="outline-none h-100 border-gray-300 border-2 rounded-2xl p-3"
                 placeholder="Write your post content here..."
@@ -96,8 +97,19 @@ function CreatePosts() {
               </h2>
               <label className="flex flex-col gap-3">
                 <span>Category</span>
-                <select ref={CatecoryRef} >
-                  <optgroup value="1">Technology</optgroup>
+                <select
+                  ref={CatecoryRef}
+                  className="
+                w-full h-10
+                rounded-[10px]
+                border border-[#D1D5DB]
+                px-4
+                text-[14px] leading-3.5 font-medium text-[#111827]
+                focus:outline-none focus:ring-2 focus:ring-[#3B82F6]
+              "
+                >
+                  <optgroup>Select category</optgroup>
+                  <option value="1">Technology</option>
                   <option value="2">Productivity</option>
                   <option value="3">Design</option>
                   <option value="4">Business</option>
@@ -118,21 +130,23 @@ function CreatePosts() {
               </div>
             </div>
 
-            <button
-            onClick={() => console.log(formData)
-            }
-              type="submit"
-              disabled={loading}
-              className={`text-white cursor-pointer rounded-2xl w-full py-3 bg-[#4346EF] flex justify-center items-center ${
-                loading ? "opacity-70" : ""
-              }`}
-            >
-              {loading ? (
-                <i className="fa-solid fa-circle-notch fa-spin text-white"></i>
-              ) : (
-                "Publish Post"
-              )}
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={() => console.log(formData)}
+                type="submit"
+                disabled={loading}
+                className={`text-white cursor-pointer rounded-2xl w-full py-3 bg-[#4346EF] flex justify-center items-center ${
+                  loading ? "opacity-70" : ""
+                }`}
+              >
+                {loading ? (
+                  <i className="fa-solid fa-circle-notch fa-spin text-white"></i>
+                ) : (
+                  "Publish Post"
+                )}
+              </button>
+              <button className="border-2 border-[#E5E7EB] rounded-2xl py-2.5 px-6 cursor-pointer">cancel</button>
+            </div>
           </div>
         </form>
       </div>
