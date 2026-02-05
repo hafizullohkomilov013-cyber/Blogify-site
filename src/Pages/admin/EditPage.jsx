@@ -128,12 +128,20 @@ function EditPage() {
               </h2>
               <label className="flex flex-col gap-3">
                 <span>Category</span>
-                <select ref={CategoryRef}>
-                  <option value={1}>Technology</option>
-                  <option value={2}>Productivity</option>
-                  <option value={3}>Design</option>
-                  <option value={4}>Business</option>
-                  <option value={5}>Lifestyle</option>
+                <select
+                  ref={CategoryRef}
+                  className="
+                w-full h-10
+                rounded-[10px]
+                border border-[#D1D5DB]
+                px-4
+                text-[14px] leading-3.5 font-medium text-[#111827]
+                focus:outline-none focus:ring-2 focus:ring-[#3B82F6]
+              "
+                >
+                  <optgroup>Select category</optgroup>
+                  <option value="1">test 1</option>
+                  <option value="2">test 2</option>
                 </select>
               </label>
             </div>
